@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 
 
-5. قم بإجراء عمليات الترحيل لقاعدة البيانات:
+5. قم بإجراء عمليات الترحيل لقاعدة البيانات عبارة كتابة الامر الاتي  في Terminal الخاص بال :
 python manage.py migrate
 
 
@@ -52,7 +52,6 @@ python manage.py migrate
 6. قم بتشغيل الخادم المحلي:
 python manage.py runserver
 
-markdown
 
 
 
@@ -68,10 +67,10 @@ markdown
 4. احفظ الملف
 
 
-## المستخدم في الهجمة dos كود ال
- لكتابة برنامج الهجمة requests تم استخدام مكتبة
+## كود dos المستخدم في التجربة 
+تم كتابة برنامج ال dos بإستخدام مكتبة requests 
 
- view بعد ازالة التعلقيات من كود ال
+ بعد ازالة التعلقيات من كود ال view.py 
 1.  vscode خاص بال  cmd في  terminal قم بتشغيل 
 2. قم بكتابة الامر تالي   py -m dos_attack/dos.py 
 3. قم بإدخال  http://127.0.0.1:8000/dos/?n=1000 
