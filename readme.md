@@ -2,7 +2,6 @@
 
 ## الوصف
 
-# Cyper_app_django 
 
 هو تطبيق ويب مبني باستخدام إطار عمل دجانجو يهدف إلى توضيح وشرح بعض مفاهيم الأمن السيبراني وتقنيات الاختراق بشكل تعليمي. يتضمن التطبيق عدة وحدات تعليمية لمختلف أنواع الهجمات والثغرات الأمنية.
 
@@ -20,35 +19,29 @@
 ## التثبيت
 
 1. قم بنسخ المستودع:
-git clone https://github.com/badrald/Cyper_app_django.git
-
+`git clone https://github.com/badrald/Cyper_app_django.git`
 
 
 2. انتقل إلى مجلد المشروع:
-cd Cyper_app_django
-
+`cd Cyper_app_django `
 
 
 3. قم بإنشاء بيئة افتراضية وتفعيلها:
-python -m venv ./
-source bin/activate # على Linux/Mac
-Scripts\activate # على Windows
-
+`python -m venv ./`
+`source bin/activate # على Linux/Mac`
+`Scripts\activate # على Windows`
 
 
 4. قم بتثبيت المكتبات المطلوبة:
-pip install -r requirements.txt
-
+`pip install -r requirements.txt`
 
 
 5. قم بإجراء عمليات الترحيل لقاعدة البيانات:
-python manage.py migrate
-
+`python manage.py migrate`
 
 
 6. قم بتشغيل الخادم المحلي:
-python manage.py runserver
-
+`python manage.py runserver`
 
 
 
