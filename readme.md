@@ -27,9 +27,9 @@
 
 
 3. قم بإنشاء بيئة افتراضية وتفعيلها:
-`python -m venv ./`
-`source bin/activate # على Linux/Mac`
-`Scripts\activate # على Windows`
+- `python -m venv ./`
+- `source bin/activate # على Linux/Mac`
+- `Scripts\activate # على Windows`
 
 
 4. قم بتثبيت المكتبات المطلوبة:
