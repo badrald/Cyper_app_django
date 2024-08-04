@@ -1,0 +1,45 @@
+{% extends "./base.html" %} {% load static %} {% block title %} ثغرة ddos داخلية
+{% endblock %} {% block hero %}
+<style>
+  .bg-image {
+    background-image: url("{% static 'cyper_app/img/ddos.jpg' %}");
+  }
+</style>
+<div class="bg-image">
+  <div class="bg-overlay"></div>
+  <div class="container content-overlay">
+    <h1 class="display-4">حساب المجموع</h1>
+    <p class="lead">
+
+    <form class="mb-3">
+      <div class="mb-3">
+        <label for="n" class="form-label">أدخل عددًا:</label>
+        <input type="number" class="form-control" id="n" name="n" value="10" />
+      </div>
+      <button type="submit" class="btn btn-primary">حساب</button>
+    </form>
+</p>
+
+    <p class="lead">{% if result %}
+    <div class="alert alert-info">النتيجة: {{ result }}</div>
+    {% endif %}
+    </p>
+
+<div class="alert alert-warning" role="alert">
+  <h4 class="alert-heading">تنبيه!</h4>
+  <p>تم تعطيل هذه النقطة النهائية (endpoint) مؤقتًا لأغراض الأمان والصيانة. يمكنك تجريب هذه  الثغرة محليا لديك في جهاز تتبع الخطوات الموجودة على الجيت هب للتجربة في هذه البيئة التعليمية.</p>
+  <hr>
+  <p class="mb-0">لمزيد من المعلومات حول ممارسات الأمان وكيفية اكتشاف الثغرات بشكل أخلاقي، يرجى الضغط على زر "تعلم المزيد" أدناه.</p>
+  <a class="btn btn-info mt-3" href="https://fb.com">تعلم المزيد</a>
+</div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const mainContentHeight = 87;
+</script>
+
+{% endblock scripts %}

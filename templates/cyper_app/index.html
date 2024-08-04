@@ -1,0 +1,111 @@
+{% extends "./base.html" %} {% load static %} {% block title %}الصفحة الرئيسية -
+موقع ضعيف الأمان{% endblock %} {% block hero %}
+<div
+  class="bg-image"
+  style="
+    background-image: url('{% static 'cyper_app/img/background.jpg' %}');
+  "
+  id="mainContent">
+  <div class="bg-overlay h-100">
+    <div class="container content-overlay py-5">
+      <h1 class="display-4">
+        هذا الموقع تم تصميمه لغرض التعرف على الثغرات الأمنية
+      </h1>
+      <p class="lead">
+        هذا الموقع يوضح بعض نقاط الضعف الأمنية الشائعة في تطبيقات الويب
+      </p>
+      <p class="lead">
+        تم هذا المشروع لمادة أمن الحاسب تحت إشراف الأستاذ أشرف خشخوشة
+      </p>
+      <hr class="my-4" />
+      <p>استكشف الثغرات الأمنية المختلفة وتعلم كيفية حمايتك منها.</p>
+      <button class="btn btn-primary btn-lg" id="learnMoreBtn">
+        تعلم المزيد
+      </button>
+
+      <div class="hacking-info" id="hackingInfo">
+        <div class="hacking-item">
+          <img
+            src="{% static 'cyper_app/img/xss.jpg' %}"
+            alt="XSS Attack"
+            class="hacking-image" />
+          <div class="hacking-text">
+            <h3>هجمات XSS (Cross-Site Scripting)</h3>
+            <p>
+              هجمات XSS تسمح للمهاجمين بحقن نصوص برمجية ضارة في صفحات الويب التي
+              يشاهدها المستخدمون الآخرون. يمكن أن تؤدي هذه الهجمات إلى سرقة
+              معلومات تسجيل الدخول، وتغيير محتوى الصفحة، أو توجيه المستخدمين إلى
+              مواقع ضارة.
+            </p>
+            <a href="{% url 'xss' %}" class="btn btn-outline-primary"
+              >تعلم المزيد
+            </a>
+          </div>
+        </div>
+        <div class="hacking-item">
+          <img
+            src="{% static 'cyper_app/img/sql_injection.jpg' %}"
+            alt="SQL Injection"
+            class="hacking-image" />
+          <div class="hacking-text">
+            <h3>حقن SQL (SQL Injection)</h3>
+            <p>
+              حقن SQL هو أسلوب لاختراق قواعد البيانات عن طريق إدخال أوامر SQL
+              ضارة في استعلامات قاعدة البيانات. يمكن أن يؤدي ذلك إلى الوصول غير
+              المصرح به إلى البيانات، أو تعديلها، أو حتى حذفها.
+            </p>
+            <a href="{% url 'sql' %}" class="btn btn-outline-primary"
+              >تعلم المزيد
+            </a>
+          </div>
+        </div>
+        <div class="hacking-item">
+          <img
+            src="{% static 'cyper_app/img/csrf.jpg' %}"
+            alt="CSRF Attack"
+            class="hacking-image" />
+          <div class="hacking-text">
+            <h3>هجمات CSRF (Cross-Site Request Forgery)</h3>
+            <p>
+              هجمات CSRF تجبر المستخدم المصادق على تنفيذ إجراءات غير مرغوب فيها
+              على تطبيق ويب يثق به المستخدم. يمكن أن تؤدي هذه الهجمات إلى تغيير
+              إعدادات الحساب، أو إجراء عمليات شراء، أو حتى سرقة البيانات.
+            </p>
+            <a href="{% url 'csrf' %}" class="btn btn-outline-primary"
+              >تعلم المزيد
+            </a>
+          </div>
+        </div>
+        <div class="hacking-item">
+          <img
+            src="{% static 'cyper_app/img/ddos.jpg' %}"
+            alt="CSRF Attack"
+            class="hacking-image" />
+          <div class="hacking-text">
+            <h3>هجمات DDoS (Distributed Denial of Service)</h3>
+            <p>
+              هجمات DDoS هي محاولات لتعطيل توفر الخدمة لمستخدمي النظام المستهدف.
+              يتم ذلك عن طريق إغراق الخادم أو الشبكة بحركة مرور زائفة من مصادر
+              متعددة، مما يؤدي إلى استنفاد موارد النظام وجعله غير قادر على
+              الاستجابة للطلبات الشرعية. يمكن أن تتسبب هذه الهجمات في تعطيل
+              المواقع الإلكترونية والخدمات عبر الإنترنت لفترات طويلة، مما يؤدي
+              إلى خسائر مالية كبيرة وأضرار سمعة للمنظمات المستهدفة.
+            </p>
+            <a href="{% url 'dos' %}" class="btn btn-outline-primary"
+              >تعلم المزيد
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const mainContentHeight = 87;
+</script>
+
+{% endblock scripts %}

